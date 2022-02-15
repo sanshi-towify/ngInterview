@@ -36,7 +36,7 @@
             ><b>{{ it.label || (it.code | codeTitle) }}</b></p
             >
             <p>{{ showAnswer(it) }}</p>
-            <ng-container *ngIf="it.subItems && it.subItems.length && result[it.code+ '-'+it.subItems[0].code]">
+            <ng-container *ngIf="it.subItems && it.subItems.length && questionResult[it.code+ '-'+it.subItems[0].code]">
               <div class="item">
                 <div *ngFor="let s of it.subItems">
                   <p
@@ -51,8 +51,8 @@
       </div>
     </ng-container>
 
-    <ng-container *ngIf="result">
-      <p>{{ result | json }}</p>
+    <ng-container *ngIf="questionResult">
+      <p>{{ questionResult | json }}</p>
     </ng-container>
   </mat-card-content>
 </mat-card>

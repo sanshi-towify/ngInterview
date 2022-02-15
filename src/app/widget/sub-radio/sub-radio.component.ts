@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, forwardRef } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
+import { QuestionType } from '../../service/type';
 
 const accessorProvider = {
   provide: NG_VALUE_ACCESSOR,
@@ -33,13 +34,13 @@ export class SubRadioComponent implements OnInit, ControlValueAccessor {
   resetSubItems(): void {
     if (this.option.subItems) {
       if (this.isShowSubItems) {
-        this.option.subItems.forEach((f: any) => {
-          const name = this.option.code + '-' + f.code;
+        this.option.subItems.forEach((question: QuestionType) => {
+          const name = this.option.code + '-' + question.code;
           this.form.addControl(name, new FormControl('', [Validators.required]));
         });
       } else {
-        this.option.subItems.forEach((f: any) => {
-          const name = this.option.code + '-' + f.code;
+        this.option.subItems.forEach((question: QuestionType) => {
+          const name = this.option.code + '-' + question.code;
           this.form.removeControl(name);
         });
       }
@@ -50,7 +51,9 @@ export class SubRadioComponent implements OnInit, ControlValueAccessor {
     this.writeValue(value);
   };
 
-  onTouch: any = () => {};
+  onTouch: any = () => {
+    console.log('touched');
+  };
 
   writeValue(obj: any): void {
     this.value = obj;

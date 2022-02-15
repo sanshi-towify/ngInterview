@@ -1,12 +1,13 @@
-import {Validators} from '@angular/forms';
+import { Validators } from '@angular/forms';
+import { OptionItemType, QuestionSessionType } from './type';
 
-const setKV = (arr: Array<string>): Array<any> => {
-  return arr.map((f, idx) => {
-    return {k: idx + 1, v: f};
+const setRadioOptions = (arr: string[]): OptionItemType[] => {
+  return arr.map((item, index): OptionItemType => {
+    return { key: (index + 1).toString(), val: item };
   });
 };
 
-const techQuestionOptions = setKV([
+const techQuestionOptions = setRadioOptions([
   '本领域所需要的基础知识较生疏，处于陌生的状态。',
   '具备本领域的基础知识，但对本领域知识理解有限，处于学习阶段。',
   '对本领域的知识和概念有一定了解。能够对相关知识加以利用。',
@@ -14,20 +15,20 @@ const techQuestionOptions = setKV([
   '专业技能，知识和行业的理解融汇贯通，在工作环境下是公认的高手。'
 ]);
 
-const YesNo = ['Yes', 'No'];
+const yesNo = ['Yes', 'No'];
 
-export const introduction = {
+export const introduction: QuestionSessionType = {
   items: [
     {
       noLabel: true,
       code: 'introduction',
-      ph: 'Introduce yourself in english',
+      placeholder: 'Introduce yourself in english',
       type: 'textarea',
       valid: [Validators.min(100)]
     }
   ]
 };
-export const job = {
+export const job: QuestionSessionType = {
   label: 'Job information',
   items: [
     {
@@ -50,7 +51,7 @@ export const job = {
   ]
 };
 
-export const personal = {
+export const personal: QuestionSessionType = {
   label: 'Personal Information',
   items: [
     {
@@ -85,7 +86,7 @@ export const personal = {
   ]
 };
 
-export const education = {
+export const education: QuestionSessionType = {
   label: 'Education',
   items: [
     {
@@ -106,7 +107,7 @@ export const education = {
     }
   ]
 };
-export const patterns = {
+export const patterns: QuestionSessionType = {
   label: 'Design Patterns',
   items: [
     {
@@ -120,13 +121,13 @@ export const patterns = {
           code: 'q1',
           label: '能否说出【懒汉单例】与【饿汉单例】的区别？',
           type: 'radio',
-          data: YesNo
+          data: yesNo
         },
         {
           code: 'q2',
           label: '你在工作中是否有刻意的使用【单例模式】解决过具体问题？',
           type: 'radio',
-          data: YesNo
+          data: yesNo
         }
       ]
     },
@@ -141,13 +142,13 @@ export const patterns = {
           code: 'q1',
           label: '能否说出【工厂模式】与【抽象工厂模式】的区别？',
           type: 'radio',
-          data: YesNo
+          data: yesNo
         },
         {
           code: 'q2',
           label: '你在工作中是否有刻意的使用【抽象工厂模式】解决过具体问题？',
           type: 'radio',
-          data: YesNo
+          data: yesNo
         }
       ]
     },
@@ -168,18 +169,18 @@ export const patterns = {
       label:
         '你是否能够在不借助任何框架的前提下仅通过基础语法实现一个简单的 【观察者模式】 的设计？',
       type: 'radio',
-      data: YesNo
+      data: yesNo
     },
     {
       code: 'p6',
       label: '你是否能够在不借助任何框架的前提下仅通过基础语法实现一个简单的 MVVM 的设计？',
       type: 'radio',
-      data: YesNo
+      data: yesNo
     }
   ]
 };
 
-export const performance = {
+export const performance: QuestionSessionType = {
   label: 'Performance',
   items: [
     {
@@ -199,20 +200,20 @@ export const performance = {
           code: 'q1',
           label: '是否了解递归与尾递归的区别？',
           type: 'radio',
-          data: YesNo
+          data: yesNo
         },
         {
           code: 'q2',
           label: '你在工作中是否用递归或尾递归解决过具体问题？',
           type: 'radio',
-          data: YesNo
+          data: yesNo
         }
       ]
     }
   ]
 };
 
-export const git = {
+export const git: QuestionSessionType = {
   label: 'GIT',
   items: [
     {
@@ -226,19 +227,19 @@ export const git = {
           code: 'df1',
           label: '在工作中是否使用过 git stash 命令解决具体问题？',
           type: 'radio',
-          data: YesNo
+          data: yesNo
         },
         {
           code: 'df2',
           label: '在工作中是否使用过 git reset 命令解决具体问题？',
           type: 'radio',
-          data: YesNo
+          data: yesNo
         },
         {
           code: 'df3',
           label: '在工作中是否使用过 git rebase 命令解决具体问题？',
           type: 'radio',
-          data: YesNo
+          data: yesNo
         }
       ]
     },
@@ -251,7 +252,7 @@ export const git = {
   ]
 };
 
-export const web = {
+export const web: QuestionSessionType = {
   label: 'WEB',
   items: [
     {
@@ -271,13 +272,13 @@ export const web = {
           code: 'df2',
           label: '是否了解 Angular 技术？',
           type: 'radio',
-          data: YesNo
+          data: yesNo
         },
         {
           code: 'df3',
           label: '是否了解 Vue / React 技术？',
           type: 'radio',
-          data: YesNo
+          data: yesNo
         }
       ]
     },
@@ -292,13 +293,13 @@ export const web = {
           code: 'df1',
           label: '你知道对称加密和非对称加密分别是什么？',
           type: 'radio',
-          data: YesNo
+          data: yesNo
         },
         {
           code: 'df2',
           label: '在你过往的工作经验中，有利用相关的加密技术解决过具体的业务问题么？',
           type: 'radio',
-          data: YesNo
+          data: yesNo
         }
       ]
     }
@@ -323,19 +324,19 @@ export const teamwork = {
           code: 'df2',
           label: '你清楚的知道 Scrum 中 master 的工作职责么？',
           type: 'radio',
-          data: YesNo
+          data: yesNo
         },
         {
           code: 'df3',
           label: '你了解 Scrum 中 不同 任务的 Size 的定义么？',
           type: 'radio',
-          data: YesNo
+          data: yesNo
         },
         {
           code: 'df3',
           label: '你了解 Scrum 中 对任务打分的规则么？',
           type: 'radio',
-          data: YesNo
+          data: yesNo
         }
       ]
     },
@@ -343,11 +344,11 @@ export const teamwork = {
       code: 't2',
       label: '你是否用过 Google Docs 套件来进行项目协作管理？',
       type: 'radio',
-      data: YesNo
+      data: yesNo
     }
   ]
 };
-export const architecture = {
+export const architecture: QuestionSessionType = {
   label: 'Architecture',
   items: [
     {
@@ -360,7 +361,7 @@ export const architecture = {
           code: 'q1',
           label: '是否在工作中利用泛型解决过具体问题？',
           type: 'radio',
-          data: YesNo
+          data: yesNo
         }
       ]
     },
@@ -374,24 +375,24 @@ export const architecture = {
           code: 'q1',
           label: '是否在工作中使用过模块化拆分的设计？',
           type: 'radio',
-          data: YesNo
+          data: yesNo
         }
       ]
     }
   ]
 };
-export const logic = {
+export const logic: QuestionSessionType = {
   label: 'Logic',
   items: [
     {
       code: 'logic',
       label: '(1), (1 1),(2 1), (1 2 1 1), (1 1 1 2 2 1), ？ 下一个是什么你能推算出来么？',
       type: 'radio',
-      data: YesNo
+      data: yesNo
     }
   ]
 };
-export const product = {
+export const product: QuestionSessionType = {
   label: 'Product',
   items: [
     {
@@ -404,19 +405,19 @@ export const product = {
           code: 'df1',
           label: '能否说出【懒汉单例】与【饿汉单例】的区别？',
           type: 'radio',
-          data: YesNo
+          data: yesNo
         },
         {
           code: 'df2',
           label: '你在工作中是否有刻意的使用【单例模式】解决过具体问题？',
           type: 'radio',
-          data: YesNo
+          data: yesNo
         }
       ]
     }
   ]
 };
-export const android = {
+export const android: QuestionSessionType = {
   label: 'Android',
   items: [
     {
@@ -429,19 +430,19 @@ export const android = {
           code: 'df1',
           label: '能否说出【懒汉单例】与【饿汉单例】的区别？',
           type: 'radio',
-          data: YesNo
+          data: yesNo
         },
         {
           code: 'df2',
           label: '你在工作中是否有刻意的使用【单例模式】解决过具体问题？',
           type: 'radio',
-          data: YesNo
+          data: yesNo
         }
       ]
     }
   ]
 };
-export const ios = {
+export const ios: QuestionSessionType = {
   label: 'IOS',
   items: [
     {
@@ -454,13 +455,13 @@ export const ios = {
           code: 'df1',
           label: '能否说出【懒汉单例】与【饿汉单例】的区别？',
           type: 'radio',
-          data: YesNo
+          data: yesNo
         },
         {
           code: 'df2',
           label: '你在工作中是否有刻意的使用【单例模式】解决过具体问题？',
           type: 'radio',
-          data: YesNo
+          data: yesNo
         }
       ]
     }
