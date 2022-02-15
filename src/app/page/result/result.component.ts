@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { QuestionService } from '../question.service';
+import { QuestionService } from '../../service/question.service';
 import { Router } from '@angular/router';
-import {Page, Question} from '../type';
-import {PageService} from '../page.service';
+import {Page, Question} from '../../service/type';
+import {PageService} from '../../service/page.service';
 
 @Component({
   selector: 'app-result',

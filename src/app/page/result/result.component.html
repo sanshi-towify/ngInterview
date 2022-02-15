@@ -1,7 +1,7 @@
 <mat-card class="ct">
   <img src="http://interview.towify.com/assets/logo.jpg"/>
   <mat-card-title>Hey, 12123: Well Done ~</mat-card-title>
-  <mat-divider></mat-divider>
+  <hr/>
 
   <p></p>
 
@@ -14,23 +14,24 @@
       In this process, please also think about what questions you would like to ask the interviewer.
       We will also conduct a question-and-answer session during the interview.
     </p>
-    <mat-divider></mat-divider>
+    <hr/>
     <p></p>
     <h2>Waiting Time:</h2>
 
-    <h4>00:00</h4>
+    <h1>
+      <countdown [config]="{leftTime: 1800, format: 'mm:ss'}"></countdown>
+    </h1>
 
-    <mat-divider></mat-divider>
+    <hr/>
 
     <p></p>
     <h2>Interview Result</h2>
 
     <ng-container *ngFor="let p of pages">
-      <div class="result" *ngFor="let q of p.questions">
-        <h4>{{ q.label }}</h4>
-        <hr/>
-        <ng-container *ngIf="q.items">
-          <div *ngFor="let it of q.items">
+      <div *ngFor="let q of p.questions">
+        <button mat-flat-button color="accent">{{ q.label }}</button>
+        <ng-container *ngIf="q.items" >
+          <div *ngFor="let it of q.items" class="result">
             <p
             ><b>{{ it.label || (it.code | codeTitle) }}</b></p
             >
@@ -45,7 +46,6 @@
                 </div>
               </div>
             </ng-container>
-            <hr/>
           </div>
         </ng-container>
       </div>

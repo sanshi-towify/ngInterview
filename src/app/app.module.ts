@@ -4,9 +4,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { WelcomeComponent } from './welcome/welcome.component';
-import {LoginDialog} from './welcome/login-dialog.component';
-import { QuestionPageComponent } from './question-page/question-page.component';
+import { WelcomeComponent } from './page/welcome/welcome.component';
+import {LoginDialog} from './page/welcome/login-dialog.component';
+import { QuestionPageComponent } from './page/question-page/question-page.component';
+import { CountdownModule } from 'ngx-countdown'
 
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
@@ -19,7 +20,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ResultComponent } from './result/result.component';
+import { ResultComponent } from './page/result/result.component';
 import { CodeTitlePipe } from './pipe/code-title.pipe';
 import { CodePhPipe } from './pipe/code-ph.pipe';
 import { SubRadioComponent } from './widget/sub-radio/sub-radio.component';
@@ -40,6 +41,8 @@ import { SubRadioComponent } from './widget/sub-radio/sub-radio.component';
     AppRoutingModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+
+    CountdownModule,
 
     MatButtonModule,
     MatCardModule,

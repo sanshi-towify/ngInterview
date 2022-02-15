@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {QuestionService} from '../question.service';
-import {PageService} from '../page.service';
+import {QuestionService} from '../../service/question.service';
+import {PageService} from '../../service/page.service';
 import {FormBuilder, FormControl, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {Page, QuestionSession} from '../type';
+import {Page, QuestionSession} from '../../service/type';
 
 @Component({
   selector: 'app-question-page',
@@ -15,7 +15,6 @@ export class QuestionPageComponent implements OnInit {
   questionSession: Array<QuestionSession> = [];
   pageForm: any = {};
   result: any = {};
-  errors: any = {};
   page: Page | null = null;
   curItemIdx = 0;
   curSessionIdx = 0;

@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
-import {Page, QuestionSession} from './type';
-import {education, introduction, job, personal} from './questions';
+import { Injectable } from '@angular/core';
+import { Page, QuestionSession } from './type';
+import { education, introduction, job, personal } from './questions';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +10,7 @@ export class PageService {
     {
       type: 'list',
       ordered: true,
-      // questions: [job, personal, education],
-      questions: [job],
+      questions: [job, personal, education],
       buttonTitle: 'Yeah, Let Us Go To Next Step!'
     },
     {
