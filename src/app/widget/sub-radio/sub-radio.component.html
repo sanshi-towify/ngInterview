@@ -6,9 +6,9 @@
 >
   <mat-radio-button
     (change)="onChange($event.value)"
-    value="{{ r.k || r }}"
-    *ngFor="let r of option.data"
-    >{{ r.v || r }}</mat-radio-button
+    value="{{ item.key || item }}"
+    *ngFor="let item of option.data"
+    >{{ item.val || item }}</mat-radio-button
   >
 </mat-radio-group>
 
@@ -18,9 +18,9 @@
     <mat-radio-group>
       <mat-radio-button
         (change)="setSubValue($event.value, su.code)"
-        value="{{ r.k || r }}"
-        *ngFor="let r of su.data"
-        >{{ r.v || r }}</mat-radio-button
+        value="{{ item.key || item }}"
+        *ngFor="let item of su.data"
+        >{{ item.val || item }}</mat-radio-button
       >
     </mat-radio-group>
   </ng-container>

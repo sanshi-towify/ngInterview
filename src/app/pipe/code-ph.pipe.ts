@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {capAll} from './code-title.pipe';
+import {capAll} from '../util';
 
 @Pipe({
   name: 'codePh'

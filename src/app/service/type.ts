@@ -1,4 +1,10 @@
-export interface Question {
+import {ValidatorFn} from '@angular/forms';
+
+export type OptionItemType = {
+  key: string,
+  val: string
+}
+export type QuestionType = {
   code: string;
   label?: string;
   inputType?: string;
@@ -7,24 +13,24 @@ export interface Question {
   type: string;
   placeholder?: string;
   help?: string;
-  data?: Array<any>;
-  valid?: any;
-  value?: any;
+  data?: string[] | OptionItemType[];
+  valid?: ValidatorFn[] | string[];
+  value?: string | number | boolean | Date;
   checkValue?: any;
-  subItems?: Array<Question>;
+  subItems?: QuestionType[];
 }
 
-export interface QuestionSession {
+export type QuestionSessionType = {
   label?: string;
-  items: Array<Question>;
-  formProps?: any;
+  items: QuestionType[];
+  formProps?: [];
 }
 
-export interface Page {
+export type PageType = {
   greeting?: boolean;
   ordered?: boolean;
   introduction?: string;
   type: string;
   buttonTitle?: string;
-  questions: Array<QuestionSession>;
+  questions: QuestionSessionType[];
 }

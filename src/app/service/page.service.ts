@@ -1,12 +1,27 @@
 import { Injectable } from '@angular/core';
-import { Page, QuestionSession } from './type';
-import { education, introduction, job, personal } from './questions';
+import { PageType, QuestionSessionType } from './type';
+import {
+  android,
+  architecture,
+  education,
+  git,
+  introduction,
+  ios,
+  job,
+  logic,
+  patterns,
+  performance,
+  personal,
+  product,
+  teamwork,
+  web
+} from './questions';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PageService {
-  questionPages: Array<Page> = [
+  questionPages: PageType[] = [
     {
       type: 'list',
       ordered: true,
@@ -31,32 +46,65 @@ export class PageService {
     }
   ];
 
-  curIndex = 0;
+  currentPageIndex = 0;
+  questionResult: Record<string, string> = {};
 
-  getNextPage(num: number): Page {
-    if (this.curIndex + num <= this.questionPages.length) {
-      this.curIndex += num;
-    }
-    return this.questionPages[this.curIndex];
+  setQuestionResult(values: Record<string, string>) {
+    this.questionResult = { ...this.questionResult, ...values };
   }
 
-  hasPage(num: number): boolean {
-    if (num < 0) {
-      return this.curIndex + num >= 0;
+  getNextPage(pageOffset: number): PageType {
+    if (this.currentPageIndex + pageOffset < this.questionPages.length) {
+      this.currentPageIndex += pageOffset;
+    }
+    return this.questionPages[this.currentPageIndex];
+  }
+
+  isHasPage(pageOffset: number): boolean {
+    if (pageOffset < 0) {
+      return this.currentPageIndex + pageOffset >= 0;
     } else {
-      return this.curIndex + num < this.questionPages.length && !this.isDone;
+      return this.currentPageIndex + pageOffset < this.questionPages.length && !this.isDone;
     }
   }
 
-  addQuestionToPage(sessions: Array<QuestionSession>) {
-    this.questionPages[1].questions = sessions;
+  getQuestionsByType(type: string): QuestionSessionType[] {
+    let items;
+    switch (type) {
+      case 'Server':
+        items = [patterns, git, performance, architecture, teamwork, logic];
+        break;
+      case 'Web':
+        items = [patterns, web, teamwork, logic];
+        break;
+      case 'IOS':
+        items = [patterns, ios, teamwork, logic];
+        break;
+      case 'Android':
+        items = [patterns, android, teamwork, logic];
+        break;
+      default:
+        items = [product, performance, logic];
+    }
+    return items;
+  }
+
+  addQuestionsToPage(questionCategory: string) {
+    if (this.currentPageIndex != 0 || !questionCategory) {
+      return;
+    }
+    const page = this.questionPages.find((item: PageType) => {
+      return item.type === 'pop';
+    });
+    if (page) page.questions = this.getQuestionsByType(questionCategory);
   }
 
   get isDone(): boolean {
-    return this.curIndex === this.questionPages.length - 1;
+    return this.currentPageIndex === this.questionPages.length - 1;
   }
 
   reset() {
-    this.curIndex = 0;
+    this.currentPageIndex = 0;
+    this.questionResult = {};
   }
 }

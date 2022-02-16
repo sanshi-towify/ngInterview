@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { QuestionService } from '../../service/question.service';
 import { Router } from '@angular/router';
-import {Page, Question} from '../../service/type';
-import {PageService} from '../../service/page.service';
+import { OptionItemType, PageType, QuestionType } from '../../service/type';
+import { PageService } from '../../service/page.service';
 
 @Component({
   selector: 'app-result',
@@ -10,25 +9,32 @@ import {PageService} from '../../service/page.service';
   styleUrls: ['./result.component.sass']
 })
 export class ResultComponent implements OnInit {
-  result: any = {};
-  questions: any = [];
-  pages: Array<Page> = [];
+  questionResult: Record<string, string> = {};
+  pages: PageType[] = [];
 
-  constructor(private router: Router, private questionService: QuestionService, private pageService: PageService) {}
+  constructor(private readonly router: Router, private readonly pageService: PageService) {}
 
   ngOnInit(): void {
-    this.result = this.questionService.result;
     this.pages = this.pageService.questionPages;
+    this.questionResult = this.pageService.questionResult;
   }
 
-  showAnswer(q: Question, isSub?: string): string {
-    let code = q.code;
+  showAnswer(question: QuestionType, isSub?: string): string {
+    let code = question.code;
     if (isSub) {
       code = isSub + '-' + code;
     }
-    const v = this.result[code];
-    if (v && q.data && q.data[0] && q.data[0].k) {
-      return v + '：' + q.data[+v - 1].v;
+    const v = this.questionResult[code];
+    if (v && !question.data) {
+      return v;
+    }
+    if (v && question.data) {
+      if (typeof question.data[0] === 'string') {
+        return v;
+      } else {
+        const index = parseInt(v) - 1;
+        return `${v}: ${(<OptionItemType>question.data[index]).val}`;
+      }
     } else {
       return v;
     }
@@ -36,7 +42,6 @@ export class ResultComponent implements OnInit {
 
   resetPage(): void {
     this.pageService.reset();
-    this.questionService.reset();
     this.router.navigate(['/']).then();
   }
 }
